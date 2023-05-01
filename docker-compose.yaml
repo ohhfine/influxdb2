@@ -1,0 +1,22 @@
+version: '3'
+services:
+  influxdb:
+    image: influxdb:latest
+    ports:
+      - 8086:8086
+      - 2003:2003
+    volumes:
+      - ${CONTAINER_HOME}/var:/var/lib/influxdb
+      - ${CONTAINER_HOME}/etc:/etc/influxdb
+      - ${CONTAINER_HOME}/db:/docker-entrypoint-initdb.d/
+    environment:
+    # - INFLUXDB_DB=${NEW_DB}
+      - INFLUXDB_ADMIN_USER=${INFLUXDB_USERNAME}
+      - INFLUXDB_ADMIN_PASSWORD=${INFLUXDB_PASSWORD}
+      - INFLUXDB_GRAPHITE_ENABLED=true
+    #  - PUID: "${PUID}"
+    #  - GUID: "${GUID}"
+    # volumes:
+    #   - ./db:/docker-entrypoint-initdb.d/
+    #   - ./data:/var/lib/postgresql/data
+    
